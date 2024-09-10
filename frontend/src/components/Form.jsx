@@ -137,7 +137,7 @@ const Form = ({ formRef }) => {
                                             <div className="col-md-12">
                                                 <input
                                                     type="submit"
-                                                    value="Contact Us"
+                                                    value="Отправить"
                                                     className="wpcf7-form-control has-spinner wpcf7-submit"
                                                 />
                                             </div>
