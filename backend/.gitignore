@@ -3,3 +3,4 @@ __pycache__/
 docker-compose.yaml
 init.sh
 application/test.py
+application/handle_model/sbert_weights.pt

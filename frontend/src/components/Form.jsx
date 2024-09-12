@@ -12,7 +12,7 @@ const Form = ({ formRef }) => {
         e.preventDefault();
         try {
             const url = base_url + '/model/apply'; // Используем правильное имя переменной
-            const result = await axios.post(url, { text });
+            const result = await axios.post(url, { 'text': text });
             setResponse(result.data);
         } catch (error) {
             console.error('Error sending POST request:', error);
