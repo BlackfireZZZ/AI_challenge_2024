@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "../Forms.css"
 import axios from 'axios';
 import base_url from "../config";
@@ -6,18 +6,37 @@ import base_url from "../config";
 const Form = ({ formRef }) => {
     const [text, setText] = useState('');
     const [response, setResponse] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [dots, setDots] = useState(1);
+
+    // Эффект для обновления точек анимации
+    useEffect(() => {
+        let interval;
+        if (loading) {
+            interval = setInterval(() => {
+                setDots((prevDots) => (prevDots % 3) + 1);
+            }, 500); // Интервал обновления точек
+        }
+        return () => clearInterval(interval);
+    }, [loading]);
 
     // Функция для отправки POST запроса
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Включаем анимацию
+        setResponse(null); // Очищаем старый ответ
+
         try {
             const url = base_url + '/model/apply'; // Используем правильное имя переменной
             const result = await axios.post(url, { 'text': text });
             setResponse(result.data);
         } catch (error) {
             console.error('Error sending POST request:', error);
+        } finally {
+            setLoading(false); // Отключаем анимацию после получения ответа
         }
     };
+
 
 
     return (
@@ -93,7 +112,7 @@ const Form = ({ formRef }) => {
                             </div>
                             <div className="ld-fancy-heading ld_fancy_heading_634d4b2e43f1a">
                                 <p className="ld-fh-element lqd-highlight-underline lqd-highlight-grow-left text-decoration-default">
-                                    Испытай модель, которая поможет легко найти курс мечты
+                                    Испытай модель, которая поможет легко пронализировать отызвы на ваш курс
                                 </p>
                             </div>
                             <div
@@ -144,21 +163,40 @@ const Form = ({ formRef }) => {
                                         </div>
                                         <div className="wpcf7-response-output" aria-hidden="true"/>
                                     </form>
+                                    {/* Анимация "Обрабатываем запрос" */}
+                                    {loading && (
+                                        <div className="loading-message">
+                                            Обрабатываем запрос{' '.repeat(dots)}
+                                        </div>
+                                    )}
+
+                                    {/* Вывод категорий, если получен ответ */}
                                     {response && (
-                                        <div className="checkbox-group">
-                                            {['practice', 'teacher', 'theory', 'tech', 'relevance'].map((field) => (
-                                                <div
-                                                    className="category-container"
-                                                    key={field}
-                                                    style={{
-                                                        borderColor: '#00cf32',
-                                                        backgroundColor: response[field] ? '#00cf32' : '#ffffff',
-                                                        color: response[field] ? '#ffffff' : '#00cf32'
-                                                    }}
-                                                >
-                                                    {field}
-                                                </div>
-                                            ))}
+                                        <div className="category-results">
+                                            <h6 style={{ color: 'black', fontWeight: 'bold' }}>
+                                                Полученные категории:
+                                            </h6>
+                                            <div className="checkbox-group" style={{padding: '0px 0px 0px 10px'}}>
+                                                {['practice', 'teacher', 'theory', 'tech', 'relevance'].map((field) => (
+                                                    <div
+                                                        className="category-container"
+                                                        key={field}
+                                                        style={{
+                                                            borderColor: '#005a1b',
+                                                            backgroundColor: response[field] ? '#005a1b' : '#ffffff',
+                                                            color: response[field] ? '#ffffff' : '#005a1b'
+                                                        }}
+                                                        onMouseEnter={(e) => {
+                                                            e.target.style.transform = 'scale(0.95)';
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            e.target.style.transform = 'scale(1)';
+                                                        }}
+                                                    >
+                                                        {field}
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     )}
 

@@ -2,14 +2,16 @@ import React from "react";
 
 
 
-const UsedTech = () => {
+const UsedTech = ({ techRef }) => {
     const nginx = require('../assets/nginx.png');
     const docker = require('../assets/Docker.png');
     const flask = require('../assets/Flask.jpg');
+    const react = require('../assets/React.png');
+
 
     return (
         <div className="ld-container container">
-            <div className="row ld-row ld-row-outer">
+            <div className="row ld-row ld-row-outer" ref={techRef}>
                 <div className="wpb_column vc_column_container vc_col-sm-12 vc_col-md-offset-2 vc_col-md-8 text-md-center liquid-column-634d4b2e31d90">
                     <div className="vc_column-inner vc_custom_1607345773487">
                         <div
@@ -24,7 +26,7 @@ const UsedTech = () => {
                                 <h5 className="ld-fh-element lqd-highlight-underline lqd-highlight-grow-left text-decoration-default"
                                 style={{color: '#00cf32'}}>
                                     {" "}
-                                    Used Technologies
+                                    На чём писалось?
                                 </h5>
                             </div>
                             <div className="ld-fancy-heading mask-text ld_fancy_heading_634d4b2e324ff">
@@ -39,7 +41,7 @@ const UsedTech = () => {
                                         style={{ position: "relative", display: "inline-block" }}
                                         className="split-unit lqd-words"
                                     >
-                                        <span className="split-inner"> We are using the best technologies to provide the best experience</span>
+                                        <span className="split-inner"> Мы используем лучшие технологии чтобы предоставить качественный пользовательский опыт</span>
                                     </div>
                                 </h4>
                             </div>
@@ -79,9 +81,9 @@ const UsedTech = () => {
                                                         <figure className="wpb_wrapper vc_figure">
                                                             <div className="vc_single_image-wrapper vc_custom_1612872199241 loaded">
                                                                 <img
-                                                                    width={98}
-                                                                    height={79}
-                                                                    src={docker}
+                                                                    width={134}
+                                                                    height={57}
+                                                                    src={react}
                                                                     className="vc_single_image-img attachment-full ld-lazyload entered loaded"
                                                                     alt=""
                                                                     loading="lazy"
@@ -105,9 +107,9 @@ const UsedTech = () => {
                                                         <figure className="wpb_wrapper vc_figure">
                                                             <div className="vc_single_image-wrapper vc_custom_1612872216074 loaded">
                                                                 <img
-                                                                    width={112}
-                                                                    height={95}
-                                                                    src={nginx}
+                                                                    width={134}
+                                                                    height={57}
+                                                                    src={flask}
                                                                     className="vc_single_image-img attachment-full ld-lazyload entered loaded"
                                                                     alt=""
                                                                     loading="lazy"
@@ -133,7 +135,7 @@ const UsedTech = () => {
                                                                 <img
                                                                     width={134}
                                                                     height={57}
-                                                                    src={flask}
+                                                                    src={docker}
                                                                     className="vc_single_image-img attachment-full ld-lazyload entered loaded"
                                                                     alt=""
                                                                     loading="lazy"
@@ -157,9 +159,9 @@ const UsedTech = () => {
                                                         <figure className="wpb_wrapper vc_figure">
                                                             <div className="vc_single_image-wrapper vc_custom_1612872231616 loaded">
                                                                 <img
-                                                                    width={153}
-                                                                    height={59}
-                                                                    src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-1.jpg"
+                                                                    width={134}
+                                                                    height={57}
+                                                                    src={nginx}
                                                                     className="vc_single_image-img attachment-full ld-lazyload entered loaded"
                                                                     alt=""
                                                                     loading="lazy"
@@ -168,113 +170,7 @@ const UsedTech = () => {
                                                                     data-sizes="(max-width: 153px) 100vw, 153px"
                                                                     data-aspect
                                                                     data-ll-status="loaded"
-                                                                    sizes="(max-width: 153px) 100vw, 153px"
-                                                                    srcSet="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-1.jpg 153w, https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-1-150x59.jpg 150w"
-                                                                />
-                                                            </div>
-                                                        </figure>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="wpb_column vc_column_container vc_col-sm-6 vc_col-md-3 vc_col-xs-6 text-center liquid-column-634d4b2e35fad vc_col-has-fill lqd-unit-animation-done"
-                                            style={{}}
-                                        >
-                                            <div className="vc_column-inner vc_custom_1605900782719">
-                                                <div className="wpb_wrapper">
-                                                    <div className="wpb_single_image wpb_content_element vc_align_  liquid_vc_single_image-634d4b2e3679f  ld-img-hover-opacity">
-                                                        <figure className="wpb_wrapper vc_figure">
-                                                            <div className="vc_single_image-wrapper vc_custom_1612872238922 loaded">
-                                                                <img
-                                                                    width={101}
-                                                                    height={57}
-                                                                    src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-2.jpg"
-                                                                    className="vc_single_image-img attachment-full ld-lazyload entered loaded"
-                                                                    alt=""
-                                                                    loading="lazy"
-                                                                    data-src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-2.jpg"
-                                                                    data-aspect
-                                                                    data-ll-status="loaded"
-                                                                />
-                                                            </div>
-                                                        </figure>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="wpb_column vc_column_container vc_col-sm-6 vc_col-md-3 vc_col-xs-6 text-center liquid-column-634d4b2e3687f vc_col-has-fill lqd-unit-animation-done"
-                                            style={{}}
-                                        >
-                                            <div className="vc_column-inner vc_custom_1605900791718">
-                                                <div className="wpb_wrapper">
-                                                    <div className="wpb_single_image wpb_content_element vc_align_  liquid_vc_single_image-634d4b2e37078  ld-img-hover-opacity">
-                                                        <figure className="wpb_wrapper vc_figure">
-                                                            <div className="vc_single_image-wrapper vc_custom_1612872247250 loaded">
-                                                                <img
-                                                                    width={78}
-                                                                    height={73}
-                                                                    src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-3.jpg"
-                                                                    className="vc_single_image-img attachment-full ld-lazyload entered loaded"
-                                                                    alt=""
-                                                                    loading="lazy"
-                                                                    data-src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-3.jpg"
-                                                                    data-aspect
-                                                                    data-ll-status="loaded"
-                                                                />
-                                                            </div>
-                                                        </figure>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="wpb_column vc_column_container vc_col-sm-6 vc_col-md-3 vc_col-xs-6 text-center liquid-column-634d4b2e37160 vc_col-has-fill lqd-unit-animation-done"
-                                            style={{}}
-                                        >
-                                            <div className="vc_column-inner vc_custom_1605900800672">
-                                                <div className="wpb_wrapper">
-                                                    <div className="wpb_single_image wpb_content_element vc_align_  liquid_vc_single_image-634d4b2e38082  ld-img-hover-opacity">
-                                                        <figure className="wpb_wrapper vc_figure">
-                                                            <div className="vc_single_image-wrapper vc_custom_1612872254080 loaded">
-                                                                <img
-                                                                    width={96}
-                                                                    height={87}
-                                                                    src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-4.jpg"
-                                                                    className="vc_single_image-img attachment-full ld-lazyload entered loaded"
-                                                                    alt=""
-                                                                    loading="lazy"
-                                                                    data-src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-4.jpg"
-                                                                    data-aspect
-                                                                    data-ll-status="loaded"
-                                                                />
-                                                            </div>
-                                                        </figure>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="wpb_column vc_column_container vc_col-sm-6 vc_col-md-3 vc_col-xs-6 text-center liquid-column-634d4b2e38173 vc_col-has-fill lqd-unit-animation-done"
-                                            style={{}}
-                                        >
-                                            <div className="vc_column-inner vc_custom_1605900810936">
-                                                <div className="wpb_wrapper">
-                                                    <div className="wpb_single_image wpb_content_element vc_align_  liquid_vc_single_image-634d4b2e389ed  ld-img-hover-opacity">
-                                                        <figure className="wpb_wrapper vc_figure">
-                                                            <div className="vc_single_image-wrapper vc_custom_1612872261702 loaded">
-                                                                <img
-                                                                    width={90}
-                                                                    height={93}
-                                                                    src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-5.jpg"
-                                                                    className="vc_single_image-img attachment-full ld-lazyload entered loaded"
-                                                                    alt=""
-                                                                    loading="lazy"
-                                                                    data-src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/Layer-5.jpg"
-                                                                    data-aspect
-                                                                    data-ll-status="loaded"
-                                                                />
+                                                                    sizes="(max-width: 153px) 100vw, 153px"/>
                                                             </div>
                                                         </figure>
                                                     </div>
@@ -294,17 +190,6 @@ const UsedTech = () => {
                             data-custom-animations="true"
                             data-ca-options='{"triggerHandler":"inview","animationTarget":"all-childs","duration":"1800","delay":"180","ease":"power4.out","direction":"forward","initValues":{"y":45,"transformOriginX":50,"transformOriginY":50,"transformOriginZ":"0px","opacity":0},"animations":{"y":0,"transformOriginX":50,"transformOriginY":50,"transformOriginZ":"0px","opacity":1}}'
                         >
-                            <a
-                                href="#"
-                                className="btn btn-solid text-uppercase circle border-thin btn-has-label ld_button_634d4b2e38c64 lqd-unit-animation-done"
-                                style={{}}
-                            >
-                <span>
-                  <span className="btn-txt" data-text="See more clients">
-                    See more clients
-                  </span>
-                </span>
-                            </a>
                         </div>
                     </div>
                 </div>

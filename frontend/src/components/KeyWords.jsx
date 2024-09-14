@@ -18,8 +18,8 @@ const KeyWords = () => {
                                 <div className="iconbox-icon-wrap"><span className="iconbox-icon-container"><i
                                     className="lqd-icn-ess icon-lqd-check"/></span></div>
                                 <div className="contents">
-                                    <h3 className="font-weight-bold">Digital Marketing</h3>
-                                    <p>The ultimate collection crafted by world-class designers.</p>
+                                    <h3 className="font-weight-bold">Большие объёмы</h3>
+                                    <p>Поможем изучить <b>все</b> отзывы на ваш курс</p>
                                 </div>
                             </div>
                         </div>
@@ -37,8 +37,8 @@ const KeyWords = () => {
                                 <div className="iconbox-icon-wrap"><span className="iconbox-icon-container"><i
                                     className="lqd-icn-ess icon-lqd-compass"/></span></div>
                                 <div className="contents">
-                                    <h3 className="font-weight-bold">No marketing skills</h3>
-                                    <p>The ultimate collection crafted by world-class designers.</p>
+                                    <h3 className="font-weight-bold">Лёгкий анализ</h3>
+                                    <p>Проанализируем отзывы и расскажем вам о <b>сильных и слабых</b> сторонах курса</p>
                                 </div>
                             </div>
                         </div>
@@ -56,8 +56,8 @@ const KeyWords = () => {
                                 <div className="iconbox-icon-wrap"><span className="iconbox-icon-container"><i
                                     className="lqd-icn-ess icon-ld-cart"/></span></div>
                                 <div className="contents">
-                                    <h3 className="font-weight-bold">Graphic Design</h3>
-                                    <p>The ultimate collection crafted by world-class designers.</p>
+                                    <h3 className="font-weight-bold">Простота использования</h3>
+                                    <p>Вставьте текст или загрузите файл - <b>остальное за нами</b></p>
                                 </div>
                             </div>
                         </div>
@@ -75,8 +75,8 @@ const KeyWords = () => {
                                 <div className="iconbox-icon-wrap"><span className="iconbox-icon-container"><i
                                     className="lqd-icn-ess icon-lqd-laptop"/></span></div>
                                 <div className="contents">
-                                    <h3 className="font-weight-bold">Digital Marketing</h3>
-                                    <p>The ultimate collection crafted by world-class designers.</p>
+                                    <h3 className="font-weight-bold">Кроссплатформенность</h3>
+                                    <p>Мы предоставляем <b>интеграцию</b> в крупные образовательные платформы</p>
                                 </div>
                             </div>
                         </div>

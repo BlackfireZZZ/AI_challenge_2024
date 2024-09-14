@@ -18,5 +18,5 @@ model.load_state_dict(torch.load('application/handle_model/sbert_weights.pt', we
 def apply():
     data = request.json
     text = data['text']
-    outp = main(text, model, tokenizer, device)
+    outp = main([text], model, tokenizer, device)
     return jsonify(outp)
