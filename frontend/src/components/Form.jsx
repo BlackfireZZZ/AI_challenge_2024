@@ -1,39 +1,109 @@
-import React, {useEffect, useState} from "react";
-import "../Forms.css"
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import "../Forms.css";
+import axios from "axios";
 import base_url from "../config";
 
 const Form = ({ formRef }) => {
     const [text, setText] = useState('');
+    const [file, setFile] = useState(null); // State to hold the uploaded file
     const [response, setResponse] = useState(null);
     const [loading, setLoading] = useState(false);
     const [dots, setDots] = useState(1);
+    const [error, setError] = useState('');
 
-    // Эффект для обновления точек анимации
+    // Effect for updating loading animation
     useEffect(() => {
         let interval;
         if (loading) {
             interval = setInterval(() => {
                 setDots((prevDots) => (prevDots % 3) + 1);
-            }, 500); // Интервал обновления точек
+            }, 500);
         }
         return () => clearInterval(interval);
     }, [loading]);
 
-    // Функция для отправки POST запроса
+    // Function to handle file upload
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0]; // Set the selected file
+        if (selectedFile) {
+            // Проверяем, является ли файл .css
+            if (selectedFile.type !== 'text/css') {
+                setError('Пожалуйста, загрузите файл формата .css');
+                setFile(null); // Сбрасываем файл
+            } else {
+                setError(''); // Сбрасываем ошибку, если файл корректный
+                setFile(selectedFile);
+            }
+        }
+
+    };
+
+    const handleFileRemove = () => {
+        setFile(null); // Очищаем состояние файла
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true); // Включаем анимацию
-        setResponse(null); // Очищаем старый ответ
+        setLoading(true);
+        setResponse(null);
 
         try {
-            const url = base_url + '/model/apply'; // Используем правильное имя переменной
-            const result = await axios.post(url, { 'text': text });
-            setResponse(result.data);
+            let result;
+
+            if (file) {
+                // Если файл существует, используем FormData и multipart/form-data
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const url = base_url + '/model/upload'; // URL для загрузки файла
+                result = await axios.post(url, formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    responseType: 'blob', // Для загрузки файла ожидаем Blob
+                });
+
+                // Получаем заголовок Content-Disposition для извлечения имени файла
+                const contentDisposition = result.headers['content-disposition'];
+                let fileName = 'downloaded_file.css';
+                if (contentDisposition) {
+                    const fileNameMatch = contentDisposition.match(/filename="?(.+)"?/);
+                    if (fileNameMatch && fileNameMatch.length > 1) {
+                        fileName = fileNameMatch[1];
+                    }
+                }
+
+                // Создаем ссылку для скачивания файла
+                const urlBlob = window.URL.createObjectURL(new Blob([result.data]));
+                const link = document.createElement('a');
+                link.href = urlBlob;
+                link.setAttribute('download', fileName); // Имя файла для скачивания
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                window.URL.revokeObjectURL(urlBlob); // Освобождаем память
+
+            } else {
+                // Если отправляем текст, используем application/json
+                if (!text) {
+                    setError('Пожалуйста, введите текстовый запрос.');
+                    return;
+                }
+
+                const url = base_url + '/model/apply'; // URL для обработки текста
+                result = await axios.post(url, { text: text }, {
+                    headers: { 'Content-Type': 'application/json' },
+                });
+
+                // Обработка ответа с текстом (например, список)
+                setResponse(result.data); // Ожидаемый ответ как список или данные
+            }
+
         } catch (error) {
-            console.error('Error sending POST request:', error);
+            console.error("Ошибка при отправке POST-запроса:", error);
         } finally {
-            setLoading(false); // Отключаем анимацию после получения ответа
+            setLoading(false);
+            setText(''); // Сброс текстового поля
+            setFile(null); // Сброс файла
+            setError(''); // Сброс сообщения об ошибке
         }
     };
 
@@ -43,13 +113,13 @@ const Form = ({ formRef }) => {
         <div
             className="ld-container container"
             style={{
-                position: "relative", // Убедитесь, что контейнер позиционирован относительно родителя
-                height: "100%", // Установите высоту контейнера
+                position: "relative",
+                height: "100%",
             }}
         >
             <div className="row ld-row ld-row-outer">
                 <div className="wpb_column vc_column_container vc_col-sm-12 liquid-column-634d4b2e42856">
-                    <div className="vc_column-inner  ">
+                    <div className="vc_column-inner">
                         <div className="wpb_wrapper">
                             <div
                                 id="ld_images_group_element_634d4b2e42909"
@@ -76,6 +146,7 @@ const Form = ({ formRef }) => {
                         </div>
                     </div>
                 </div>
+
                 <div
                     className="z-index-2 pull-down-column wpb_column vc_column_container vc_col-sm-12 liquid-column-634d4b2e43776 liquid-column-responsive-634d4b2e43778 vc_col-has-fill"
                     data-parallax="true"
@@ -119,30 +190,18 @@ const Form = ({ formRef }) => {
                                 id="ld_cf7_634d4b2e4430b"
                                 className="lqd-contact-form lqd-contact-form-inputs-md lqd-contact-form-inputs-filled lqd-contact-form-inputs-round lqd-contact-form-button-lg lqd-contact-form-button-circle ld_cf7_634d4b2e4430b vc_custom_1599654723861"
                             >
-                                <div
-                                    role="form"
-                                    className="wpcf7"
-                                    id="wpcf7-f75-p5-o1"
-                                    lang="en-US"
-                                    dir="ltr"
-                                >
-                                    <div className="screen-reader-response">
-                                        <p role="status" aria-live="polite" aria-atomic="true" />
-                                        <ul />
-                                    </div>
+                                <div role="form" className="wpcf7" id="wpcf7-f75-p5-o1">
                                     <form
                                         onSubmit={handleSubmit}
                                         method="post"
                                         className="wpcf7-form init"
                                         noValidate="novalidate"
-                                        data-status="init"
                                     >
                                         <div className="row">
-                                            <div className="col-md-12 mb-4">
-                                                <span className="wpcf7-form-control-wrap" data-name="textarea-312">
+                                            <div className="col-md-9 mb-4">
+                                                  <span className="wpcf7-form-control-wrap" data-name="textarea-312">
                                                     <textarea
                                                         onChange={(e) => setText(e.target.value)}
-                                                        required
                                                         name="textarea-312"
                                                         cols={10}
                                                         rows={5}
@@ -150,42 +209,17 @@ const Form = ({ formRef }) => {
                                                         aria-required="true"
                                                         aria-invalid="false"
                                                         placeholder="Отзыв"
+                                                        style={{marginBottom: "5px"}}
                                                     />
-                                                </span>
+                                                  </span>
                                             </div>
-                                            <div className="col-md-12">
-                                                <input
-                                                    type="submit"
-                                                    value="Отправить"
-                                                    className="wpcf7-form-control has-spinner wpcf7-submit"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="wpcf7-response-output" aria-hidden="true"/>
-                                    </form>
-                                    {/* Анимация "Обрабатываем запрос" */}
-                                    {loading && (
-                                        <div className="loading-message">
-                                            Обрабатываем запрос{' '.repeat(dots)}
-                                        </div>
-                                    )}
 
-                                    {/* Вывод категорий, если получен ответ */}
-                                    {response && (
-                                        <div className="category-results">
-                                            <h6 style={{ color: 'black', fontWeight: 'bold' }}>
-                                                Полученные категории:
-                                            </h6>
-                                            <div className="checkbox-group" style={{padding: '0px 0px 0px 10px'}}>
-                                                {['practice', 'teacher', 'theory', 'tech', 'relevance'].map((field) => (
+                                            <div
+                                                className="col-md-3 mb-4"
+                                                style={{display: "flex", alignItems: "center", flexDirection: "column"}}
+                                            >
+                                                <label htmlFor="file-upload" style={{cursor: "pointer"}}>
                                                     <div
-                                                        className="category-container"
-                                                        key={field}
-                                                        style={{
-                                                            borderColor: '#005a1b',
-                                                            backgroundColor: response[field] ? '#005a1b' : '#ffffff',
-                                                            color: response[field] ? '#ffffff' : '#005a1b'
-                                                        }}
                                                         onMouseEnter={(e) => {
                                                             e.target.style.transform = 'scale(0.95)';
                                                         }}
@@ -193,42 +227,121 @@ const Form = ({ formRef }) => {
                                                             e.target.style.transform = 'scale(1)';
                                                         }}
                                                     >
-                                                        {field}
+                                                        <a
+                                                            style={{
+                                                                display: "inline-block",
+                                                                padding: "12px",
+                                                                borderRadius: "10px",
+                                                                border: "2px solid black", // Черная обводка
+                                                                color: "black", // Черный текст
+                                                                backgroundColor: "white", // Белый фон
+                                                                textDecoration: "none",
+                                                                textAlign: "center",
+                                                                width: "70%",
+                                                                marginRight: "10px",
+                                                            }}
+                                                        >
+                                                            Загрузить файл
+                                                        </a>
+                                                    </div>
+                                                </label>
+                                                <input
+                                                    id="file-upload"
+                                                    type="file"
+                                                    onChange={handleFileChange}
+                                                    style={{display: "none"}} // Hidden input
+                                                />
+
+                                                {file && (
+                                                    <div style={{
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        marginTop: "10px",
+                                                        maxWidth: "70%"
+                                                    }}>
+                                                        <p
+                                                            style={{
+                                                                whiteSpace: "nowrap",
+                                                                overflow: "hidden",
+                                                                textOverflow: "ellipsis",
+                                                                marginRight: "10px",
+                                                                flex: "1",
+                                                            }}
+                                                        >
+                                                            {file.name}
+                                                        </p>
+                                                        <button
+                                                            type="button"
+                                                            onClick={handleFileRemove}
+                                                            style={{
+                                                                backgroundColor: "transparent",
+                                                                border: "none",
+                                                                cursor: "pointer",
+                                                                color: "red",
+                                                                fontSize: "16px",
+                                                            }}
+                                                        >
+                                                            &times; {/* Крестик */}
+                                                        </button>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        {error && (
+                                            <p style={{ color: 'red', marginBottom: '20px' }}>{error}</p>
+                                        )}
+                                        <input
+                                            type="submit"
+                                            value="Отправить"
+                                            className="wpcf7-form-control has-spinner wpcf7-submit"
+                                            style={{
+                                                borderRadius: "50px",
+                                                padding: "10px 20px",
+                                                position: "relative",
+                                                bottom: "10px",
+                                                left: "10px",
+                                                margin: "5px",
+                                                width: "20%",
+                                            }}
+                                        />
+                                        <div className="wpcf7-response-output" aria-hidden="true"/>
+                                    </form>
+
+
+                                    {/* Display categories if response is received */}
+                                    {response && (
+                                        <div className="category-results">
+                                            <h6 style={{color: "black", fontWeight: "bold"}}>Полученные категории:</h6>
+                                            <div className="checkbox-group" style={{padding: "0px 0px 0px 10px"}}>
+                                                {['practice', 'teacher', 'theory', 'tech', 'relevance'].map((field, index) => (
+                                                    <div
+                                                        className="category-container"
+                                                        key={field}
+                                                        style={{
+                                                            borderColor: response[index] === 1 ? '#218838' : response[index] === -1 ? '#c82333' : '#5a6268',
+                                                            backgroundColor: response[index] === 1 ? '#28a745' : response[index] === -1 ? '#dc3545' : '#6c757d',
+                                                            color: '#ffffff',
+                                                            borderWidth: '2px',
+                                                            borderRadius: '15px',
+                                                            marginBottom: '5px',
+                                                            width: '170px',
+                                                            display: 'inline-block',
+                                                        }}
+                                                    >
+                                                        <label
+                                                            style={{
+                                                                padding: '10px',
+                                                                margin: '0px',
+                                                                cursor: 'pointer',
+                                                                width: '100%',
+                                                            }}>
+                                                            {field.charAt(0).toUpperCase() + field.slice(1)}
+                                                        </label>
                                                     </div>
                                                 ))}
                                             </div>
                                         </div>
                                     )}
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    className="pull-down-column wpb_column vc_column_container vc_col-sm-12 liquid-column-634d4b2e448ea">
-                    <div className="vc_column-inner  ">
-                        <div className="wpb_wrapper">
-                            <div
-                                id="ld_images_group_element_634d4b2e449a1"
-                                className="lqd-imggrp-single ld_images_group_element_634d4b2e449a1"
-                            >
-                                <div
-                                    className="lqd-imggrp-img-container"
-                                    data-parallax="true"
-                                    data-parallax-from='{"y":90}'
-                                    data-parallax-to='{"y":-50}'
-                                    data-parallax-options='{"overflowHidden":false,"ease":"linear","start":"top bottom"}'
-                                    style={{ transform: "translate3d(0px, 63.19px, 0px)" }}
-                                >
-                                    <figure className="loaded">
-                                        <img
-                                            src="https://multiusepro.liquid-themes.com/wp-content/uploads/2020/01/dots-1.svg"
-                                            className="attachment-full size-full"
-                                            alt=""
-                                            loading="lazy"
-                                        />
-                                    </figure>
                                 </div>
                             </div>
                         </div>
@@ -240,3 +353,4 @@ const Form = ({ formRef }) => {
 };
 
 export default Form;
+
