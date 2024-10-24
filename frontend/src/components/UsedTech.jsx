@@ -26,7 +26,7 @@ const UsedTech = ({ techRef }) => {
                                 <h5 className="ld-fh-element lqd-highlight-underline lqd-highlight-grow-left text-decoration-default"
                                 style={{color: '#00cf32'}}>
                                     {" "}
-                                    На чём писалось?
+                                    О разработке
                                 </h5>
                             </div>
                             <div className="ld-fancy-heading mask-text ld_fancy_heading_634d4b2e324ff">
@@ -41,7 +41,7 @@ const UsedTech = ({ techRef }) => {
                                         style={{ position: "relative", display: "inline-block" }}
                                         className="split-unit lqd-words"
                                     >
-                                        <span className="split-inner"> Мы используем лучшие технологии чтобы предоставить качественный пользовательский опыт</span>
+                                        <span className="split-inner">  Благодаря использованию передовых технологий, мы обеспечиваем вас качественным пользовательским опытом.</span>
                                     </div>
                                 </h4>
                             </div>

@@ -177,13 +177,13 @@ const Form = ({ formRef }) => {
                                         style={{ position: "relative", display: "inline-block" }}
                                         className="split-unit lqd-words"
                                     >
-                                        <span className="split-inner"> Учись легко сейчас</span>
+                                        <span className="split-inner"> Попробуйте прямо сейчас</span>
                                     </div>
                                 </h4>
                             </div>
                             <div className="ld-fancy-heading ld_fancy_heading_634d4b2e43f1a">
                                 <p className="ld-fh-element lqd-highlight-underline lqd-highlight-grow-left text-decoration-default">
-                                    Испытай модель, которая поможет легко пронализировать отызвы на ваш курс
+                                    Испытайте модель, которая поможет легко пронализировать отызвы на ваш курс
                                 </p>
                             </div>
                             <div
@@ -311,7 +311,7 @@ const Form = ({ formRef }) => {
                                     {/* Display categories if response is received */}
                                     {response && (
                                         <div className="category-results">
-                                            <h6 style={{color: "black", fontWeight: "bold"}}>Полученные категории:</h6>
+                                            <h6 style={{color: "black", fontWeight: "bold"}}>Полученный результат:</h6>
                                             <div className="checkbox-group" style={{padding: "0px 0px 0px 10px"}}>
                                                 {['practice', 'teacher', 'theory', 'tech', 'relevance'].map((field, index) => (
                                                     <div

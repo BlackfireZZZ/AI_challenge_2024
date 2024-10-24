@@ -131,7 +131,7 @@ function App() {
                           </div>
                           <div className="ld-fancy-heading ld_fancy_heading_634d4b2e05cbd"><p
                               className="ld-fh-element lqd-highlight-underline lqd-highlight-grow-left text-decoration-default">
-                            Мы изучаем отзывы на ваш курс и помогаем найти сильные и слабые стороны</p></div>
+                            Мы изучаем отзывы на ваш курс и помогаем определить сильные и слабые стороны</p></div>
                           <div
                               className="vc_row vc_inner vc_row-fluid vc_custom_1618491590503 liquid-row-shadowbox-634d4b2e07b4f vc_column-gap-0">
                             <div className="ld-container container-fluid">

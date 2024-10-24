@@ -69,7 +69,7 @@ const Header = ({techRef, aboutUsRef, formRef}) => {
                                         textDecoration: 'none',
                                     }}
                                 >
-                                    Home
+                                    Главная
                                 </a>
                             </li>
 
@@ -126,7 +126,7 @@ const Header = ({techRef, aboutUsRef, formRef}) => {
                                 <a onClick={scrollToTech} style={{
                                     color: '#002352',
                                     textDecoration: 'none',
-                                }}>На чём писалось</a></li>
+                                }}>О разработке</a></li>
                         </ul>
                     </div>
                 </div>
@@ -138,7 +138,7 @@ const Header = ({techRef, aboutUsRef, formRef}) => {
                         onClick={scrollToForm}
                         style={{cursor: 'pointer'}}>
                     <span>
-                      <span className="btn-txt" data-text="Start a project">Начни сейчас</span>
+                      <span className="btn-txt" data-text="Start a project">Начать сейчас</span>
                     </span>
                     </a>
                 </div>
