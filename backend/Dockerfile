@@ -34,7 +34,7 @@ RUN apt-get install -y \
 COPY backend/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-RUN pip install torch torchvision torchaudio -f https://download.pytorch.org/whl/cu111/torch_stable.html
+RUN pip install torch -f https://download.pytorch.org/whl/cu111/torch_stable.html
 
 
 # Копируем код в контейнер

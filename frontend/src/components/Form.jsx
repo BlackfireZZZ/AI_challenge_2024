@@ -26,9 +26,9 @@ const Form = ({ formRef }) => {
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0]; // Set the selected file
         if (selectedFile) {
-            // Проверяем, является ли файл .css
-            if (selectedFile.type !== 'text/css') {
-                setError('Пожалуйста, загрузите файл формата .css');
+            // Проверяем, является ли файл .csv
+            if (selectedFile.type !== 'text/csv') {
+                setError('Пожалуйста, загрузите файл формата .csv');
                 setFile(null); // Сбрасываем файл
             } else {
                 setError(''); // Сбрасываем ошибку, если файл корректный
@@ -63,7 +63,7 @@ const Form = ({ formRef }) => {
 
                 // Получаем заголовок Content-Disposition для извлечения имени файла
                 const contentDisposition = result.headers['content-disposition'];
-                let fileName = 'downloaded_file.css';
+                let fileName = 'downloaded_file.csv';
                 if (contentDisposition) {
                     const fileNameMatch = contentDisposition.match(/filename="?(.+)"?/);
                     if (fileNameMatch && fileNameMatch.length > 1) {
@@ -318,9 +318,9 @@ const Form = ({ formRef }) => {
                                                         className="category-container"
                                                         key={field}
                                                         style={{
-                                                            borderColor: response[index] === 1 ? '#218838' : response[index] === -1 ? '#c82333' : '#5a6268',
-                                                            backgroundColor: response[index] === 1 ? '#28a745' : response[index] === -1 ? '#dc3545' : '#6c757d',
-                                                            color: '#ffffff',
+                                                            borderColor: response[index] === 3 ? '#218838' : response[index] === 1 ? '#c82333' : response[index] === 2 ? '#5a6268' : '#2d2d2d',
+                                                            backgroundColor: response[index] === 1 ? '#28a745' : response[index] === -1 ? '#dc3545' : response[index] === 2 ? '#6c757d': '#ffffff',
+                                                            color: response[index] === 0 ? '#2d2d2d' : '#ffffff',
                                                             borderWidth: '2px',
                                                             borderRadius: '15px',
                                                             marginBottom: '5px',
